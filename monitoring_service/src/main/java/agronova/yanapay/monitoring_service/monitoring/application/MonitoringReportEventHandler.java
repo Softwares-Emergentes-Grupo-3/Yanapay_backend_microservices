@@ -6,6 +6,7 @@ import agronova.yanapay.monitoring_service.shared.domain.services.MqttMessageHan
 import agronova.yanapay.monitoring_service.shared.domain.services.MqttTopicHandler;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,10 +28,12 @@ public class MonitoringReportEventHandler implements MqttMessageHandler {
     @Override
     public void handle(MqttMessage message) {
         String messageString;
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
 
         try {
             messageString = new String(message.getPayload());
-            var command = new ObjectMapper().readValue(messageString, InsertMonitoringReportCommand.class);
+            var command = mapper.readValue(messageString, InsertMonitoringReportCommand.class);
             insertMonitoringReportCommandHandler.handle(command);
         }
         catch (JsonProcessingException e) {

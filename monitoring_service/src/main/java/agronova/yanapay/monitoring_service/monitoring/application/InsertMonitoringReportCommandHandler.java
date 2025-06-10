@@ -1,13 +1,11 @@
 package agronova.yanapay.monitoring_service.monitoring.application;
 
 import agronova.yanapay.monitoring_service.monitoring.domain.model.entities.MonitoringReport;
-import agronova.yanapay.monitoring_service.monitoring.domain.model.entities.MonitoringReportCache;
 import agronova.yanapay.monitoring_service.monitoring.domain.services.insertMonitoringReport.IInsertMonitoringReportCommandHandler;
 import agronova.yanapay.monitoring_service.monitoring.domain.services.insertMonitoringReport.InsertMonitoringReportCommand;
 import agronova.yanapay.monitoring_service.monitoring.infrastructure.persistence.jpa.repositories.MonitoringReportCacheRepository;
 import agronova.yanapay.monitoring_service.monitoring.infrastructure.persistence.jpa.repositories.MonitoringReportRepository;
 import agronova.yanapay.monitoring_service.shared.interfaces.exceptions.ResourceNotFoundException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +28,7 @@ public class InsertMonitoringReportCommandHandler implements IInsertMonitoringRe
     public void handle(InsertMonitoringReportCommand command) {
 
         try {
-            var report = new ObjectMapper().convertValue(command, MonitoringReport.class);
+            var report = MonitoringReport.fromInsertMonitoringReportCommand(command);
 
             var cache = cacheRepository.findById(command.deviceCode())
                     .orElseThrow( () -> new ResourceNotFoundException("Cache not found for device: " + command.deviceCode()));

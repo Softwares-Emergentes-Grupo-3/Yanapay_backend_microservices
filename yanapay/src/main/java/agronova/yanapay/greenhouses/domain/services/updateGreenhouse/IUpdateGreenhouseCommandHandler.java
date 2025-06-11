@@ -1,5 +1,7 @@
 package agronova.yanapay.greenhouses.domain.services.updateGreenhouse;
 
+import agronova.yanapay.greenhouses.domain.model.aggregates.Greenhouse;
+
 public interface IUpdateGreenhouseCommandHandler {
-    String handle(UpdateGreenhouseCommand command);
+    Greenhouse handle(UpdateGreenhouseCommand command);
 }

@@ -1,9 +1,7 @@
 package agronova.yanapay.greenhouses.domain.services.getGreenhouseById;
 
-import agronova.yanapay.monitoring.domain.model.aggregates.Device;
-
-import java.util.Set;
+import agronova.yanapay.greenhouses.domain.model.aggregates.Greenhouse;
 
 public interface IGetGreenhouseByIdQueryHandler {
-    Set<Device> handle(GetGreenhouseByIdQuery query);
+    Greenhouse handle(GetGreenhouseByIdQuery query);
 }

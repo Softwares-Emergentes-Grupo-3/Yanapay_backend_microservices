@@ -5,6 +5,8 @@ import agronova.yanapay.monitoring.domain.model.aggregates.Device;
 import java.util.List;
 
 public record GetGreenhouseByIdResponse(
+        Long id,
+        String name,
         List<DeviceDTO> devices
 ) {
 }

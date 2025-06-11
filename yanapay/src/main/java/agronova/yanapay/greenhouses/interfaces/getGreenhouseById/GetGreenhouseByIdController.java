@@ -1,5 +1,6 @@
 package agronova.yanapay.greenhouses.interfaces.getGreenhouseById;
 
+import agronova.yanapay.greenhouses.domain.model.aggregates.Greenhouse;
 import agronova.yanapay.greenhouses.domain.services.getGreenhouseById.GetGreenhouseByIdQuery;
 import agronova.yanapay.greenhouses.domain.services.getGreenhouseById.IGetGreenhouseByIdQueryHandler;
 import agronova.yanapay.greenhouses.interfaces.GreenhouseController;
@@ -31,13 +32,14 @@ public class GetGreenhouseByIdController extends GreenhouseController {
     {
         var query = new GetGreenhouseByIdQuery(id);
 
-        Set<Device> devices = getGreenhouseByIdQueryHandler.handle(query);
+        Greenhouse greenhouse = getGreenhouseByIdQueryHandler.handle(query);
+        Set<Device> devices = greenhouse.getDevices();
 
         List<DeviceDTO> deviceDtos = devices.stream()
                 .map(DeviceDTO::fromEntity)
                 .toList();
 
-        var response = new GetGreenhouseByIdResponse(deviceDtos);
+        var response = new GetGreenhouseByIdResponse(greenhouse.getId(), greenhouse.getName(),deviceDtos);
 
         return ResponseEntity.ok(response);
     }

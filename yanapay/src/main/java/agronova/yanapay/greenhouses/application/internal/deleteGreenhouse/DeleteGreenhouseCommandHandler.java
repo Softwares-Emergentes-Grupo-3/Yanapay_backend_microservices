@@ -3,6 +3,7 @@ package agronova.yanapay.greenhouses.application.internal.deleteGreenhouse;
 import agronova.yanapay.greenhouses.domain.model.infrastructure.persistence.jpa.repositories.GreenhouseRepository;
 import agronova.yanapay.greenhouses.domain.services.deleteGreenhouse.DeleteGreenhouseCommand;
 import agronova.yanapay.greenhouses.domain.services.deleteGreenhouse.IDeleteGreenhouseCommandHandler;
+import agronova.yanapay.shared.interfaces.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,7 @@ public class DeleteGreenhouseCommandHandler implements IDeleteGreenhouseCommandH
             return String.format("greenhouse with id %d deleted", command.id());
         }
 
-        return String.format("greenhouse with id %d not found", command.id());
+        throw new ResourceNotFoundException("Greenhouse with id " + command.id() + " not found");
 
     }
 }

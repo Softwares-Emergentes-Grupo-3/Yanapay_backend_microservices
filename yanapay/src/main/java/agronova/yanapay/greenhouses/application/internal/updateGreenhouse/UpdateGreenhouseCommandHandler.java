@@ -20,7 +20,7 @@ public class UpdateGreenhouseCommandHandler implements IUpdateGreenhouseCommandH
     }
 
     @Override
-    public String handle(UpdateGreenhouseCommand command) {
+    public Greenhouse handle(UpdateGreenhouseCommand command) {
 
         var greenhouse = greenhouseRepository.findById(command.id())
                 .orElseThrow(() -> new ResourceNotFoundException("Greenhouse not found with id: " + command.id()));
@@ -29,11 +29,10 @@ public class UpdateGreenhouseCommandHandler implements IUpdateGreenhouseCommandH
             throw new ConflictException("Name already exists");
         }
 
-
         greenhouse.updateName(command.name());
 
         greenhouseRepository.save(greenhouse);
 
-        return String.format("Greenhouse with name %s has been updated", command.name());
+        return greenhouse;
     }
 }

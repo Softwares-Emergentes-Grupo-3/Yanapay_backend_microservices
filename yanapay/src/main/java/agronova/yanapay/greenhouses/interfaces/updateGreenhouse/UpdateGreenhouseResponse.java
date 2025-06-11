@@ -1,4 +1,6 @@
 package agronova.yanapay.greenhouses.interfaces.updateGreenhouse;
 
-public record UpdateGreenhouseResponse(String response) {
+public record UpdateGreenhouseResponse(
+        Long id,
+        String name) {
 }

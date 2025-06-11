@@ -26,7 +26,7 @@ public class UpdateGreenhouseController extends GreenhouseController {
 
         var result = updateGreenhouseCommandHandler.handle(updateGreenhouseCommand);
 
-        var response = new UpdateGreenhouseResponse(result);
+        var response = new UpdateGreenhouseResponse(result.getId(), result.getName());
 
         return ResponseEntity.ok(response);
     }

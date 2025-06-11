@@ -26,12 +26,14 @@ public class GetGreenhouseByIdQueryHandler implements IGetGreenhouseByIdQueryHan
     }
 
     @Override
-    public Set<Device> handle(GetGreenhouseByIdQuery query) {
-        if (greenhouseRepository.existsGreenhouseById(query.id())){
-            return deviceRepository.findAllByGreenhouse_Id(query.id());
-        }
-        throw new EntityNotFoundException("Greenhouse with id " + query.id() + " not found");
-    }
+    public Greenhouse handle(GetGreenhouseByIdQuery query) {
+            var greenhouse = greenhouseRepository.findById(query.id())
+                    .orElseThrow(() -> new ResourceNotFoundException("Greenhouse not found with id: " + query.id()));
+            Set<Device> devices = deviceRepository.findAllByGreenhouse_Id(query.id());
 
+            greenhouse.setDevices(devices);
+            return greenhouse;
+
+    }
 
 }

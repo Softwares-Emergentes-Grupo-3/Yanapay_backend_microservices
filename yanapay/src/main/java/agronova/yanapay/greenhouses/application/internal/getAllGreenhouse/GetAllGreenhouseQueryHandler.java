@@ -1,7 +1,7 @@
 package agronova.yanapay.greenhouses.application.internal.getAllGreenhouse;
 
 import agronova.yanapay.greenhouses.domain.model.aggregates.Greenhouse;
-import agronova.yanapay.greenhouses.domain.model.infrastructure.persistence.jpa.repositories.GreenhouseRepository;
+import agronova.yanapay.greenhouses.infrastructure.infrastructure.persistence.jpa.repositories.GreenhouseRepository;
 import agronova.yanapay.greenhouses.domain.services.getAllGreenhouse.GetAllGreenhouseQuery;
 import agronova.yanapay.greenhouses.domain.services.getAllGreenhouse.IGetAllGreenhouseQueryHandler;
 import org.springframework.beans.factory.annotation.Autowired;

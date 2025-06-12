@@ -3,8 +3,6 @@ package agronova.yanapay.greenhouses.interfaces.deleteGreenhouse;
 import agronova.yanapay.greenhouses.domain.services.deleteGreenhouse.DeleteGreenhouseCommand;
 import agronova.yanapay.greenhouses.domain.services.deleteGreenhouse.IDeleteGreenhouseCommandHandler;
 import agronova.yanapay.greenhouses.interfaces.GreenhouseController;
-import com.oracle.svm.core.annotate.Delete;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

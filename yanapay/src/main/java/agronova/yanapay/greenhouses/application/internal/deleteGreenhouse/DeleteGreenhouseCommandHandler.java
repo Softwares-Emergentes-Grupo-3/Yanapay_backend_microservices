@@ -1,6 +1,6 @@
 package agronova.yanapay.greenhouses.application.internal.deleteGreenhouse;
 
-import agronova.yanapay.greenhouses.domain.model.infrastructure.persistence.jpa.repositories.GreenhouseRepository;
+import agronova.yanapay.greenhouses.infrastructure.infrastructure.persistence.jpa.repositories.GreenhouseRepository;
 import agronova.yanapay.greenhouses.domain.services.deleteGreenhouse.DeleteGreenhouseCommand;
 import agronova.yanapay.greenhouses.domain.services.deleteGreenhouse.IDeleteGreenhouseCommandHandler;
 import agronova.yanapay.shared.interfaces.exceptions.ResourceNotFoundException;

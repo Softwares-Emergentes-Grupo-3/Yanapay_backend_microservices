@@ -1,7 +1,7 @@
 package agronova.yanapay.shared.infrastructure.seed;
 
 import agronova.yanapay.greenhouses.domain.model.aggregates.Greenhouse;
-import agronova.yanapay.greenhouses.domain.model.infrastructure.persistence.jpa.repositories.GreenhouseRepository;
+import agronova.yanapay.greenhouses.infrastructure.infrastructure.persistence.jpa.repositories.GreenhouseRepository;
 import agronova.yanapay.monitoring.domain.model.aggregates.Device;
 import agronova.yanapay.monitoring.infrastructure.persistence.jpa.repositories.DeviceRepository;
 import org.springframework.boot.ApplicationArguments;

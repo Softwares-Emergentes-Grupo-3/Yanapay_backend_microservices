@@ -1,7 +1,7 @@
 package agronova.yanapay.greenhouses.application.internal.updateGreenhouse;
 
 import agronova.yanapay.greenhouses.domain.model.aggregates.Greenhouse;
-import agronova.yanapay.greenhouses.domain.model.infrastructure.persistence.jpa.repositories.GreenhouseRepository;
+import agronova.yanapay.greenhouses.infrastructure.infrastructure.persistence.jpa.repositories.GreenhouseRepository;
 import agronova.yanapay.greenhouses.domain.services.updateGreenhouse.IUpdateGreenhouseCommandHandler;
 import agronova.yanapay.greenhouses.domain.services.updateGreenhouse.UpdateGreenhouseCommand;
 import agronova.yanapay.shared.interfaces.exceptions.ConflictException;

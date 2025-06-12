@@ -1,6 +1,6 @@
 package agronova.yanapay.irrigation.application.internal.startFumigation;
 
-import agronova.yanapay.greenhouses.domain.model.infrastructure.persistence.jpa.repositories.GreenhouseRepository;
+import agronova.yanapay.greenhouses.infrastructure.infrastructure.persistence.jpa.repositories.GreenhouseRepository;
 import agronova.yanapay.irrigation.domain.models.factories.IrrigationFactory;
 import agronova.yanapay.irrigation.domain.services.startFumigation.IStartFumigationCommandHandler;
 import agronova.yanapay.irrigation.domain.services.startFumigation.StartFumigationCommand;

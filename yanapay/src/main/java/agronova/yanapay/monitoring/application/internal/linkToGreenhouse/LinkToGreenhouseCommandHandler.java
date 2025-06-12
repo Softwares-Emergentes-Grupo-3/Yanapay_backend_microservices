@@ -1,6 +1,6 @@
 package agronova.yanapay.monitoring.application.internal.linkToGreenhouse;
 
-import agronova.yanapay.greenhouses.domain.model.infrastructure.persistence.jpa.repositories.GreenhouseRepository;
+import agronova.yanapay.greenhouses.infrastructure.infrastructure.persistence.jpa.repositories.GreenhouseRepository;
 import agronova.yanapay.monitoring.domain.services.insertMonitoringReportCache.IInsertMonitoringReportCacheCommandHandler;
 import agronova.yanapay.monitoring.domain.services.insertMonitoringReportCache.InsertMonitoringReportCacheCommand;
 import agronova.yanapay.monitoring.domain.services.linkToGreenhouse.ILinkToGreenhouseCommandHandler;

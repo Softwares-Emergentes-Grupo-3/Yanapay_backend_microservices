@@ -1,0 +1,35 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: devices_service_route
+              uri: http://localhost:8081
+              predicates:
+                - Path=/api/v1/devices/**
+            - id: irrigation_service_route
+              uri: http://localhost:8081
+              predicates:
+                - Path=/api/v1/irrigation/**
+            - id: greenhouses_service_route
+              uri: http://localhost:8081
+              predicates:
+                - Path=/api/v1/greenhouses/**
+            - id: linking_service_route
+              uri: http://localhost:8081
+              predicates:
+                - Path=/api/v1/linking_devices/**
+            - id: monitoring_service_route
+              uri: http://localhost:8082
+              predicates:
+                - Path=/api/v1/reports/**
+
+logging:
+  pattern:
+    console: "%n%d{yyyy-MM-dd HH:mm:ss} | %-5level | %logger{1.} | %msg"

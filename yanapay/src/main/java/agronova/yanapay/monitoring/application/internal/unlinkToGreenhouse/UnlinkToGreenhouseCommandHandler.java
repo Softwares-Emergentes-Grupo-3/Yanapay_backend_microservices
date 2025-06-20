@@ -1,7 +1,7 @@
 package agronova.yanapay.monitoring.application.internal.unlinkToGreenhouse;
 
-import agronova.yanapay.monitoring.domain.services.removeMonitoringReportCache.IRemoveMonitoringReportCacheCommandHandler;
-import agronova.yanapay.monitoring.domain.services.removeMonitoringReportCache.RemoveMonitoringReportCacheCommand;
+import agronova.yanapay.monitoring.domain.services.removeDeviceAssignment.IRemoveDeviceAssignmentCommandHandler;
+import agronova.yanapay.monitoring.domain.services.removeDeviceAssignment.RemoveDeviceAssignmentCommand;
 import agronova.yanapay.monitoring.domain.services.unlinkToGreenhouse.IUnlinkToGreenhouseCommandHandler;
 import agronova.yanapay.monitoring.domain.services.unlinkToGreenhouse.UnlinkToGreenhouseCommand;
 import agronova.yanapay.monitoring.infrastructure.persistence.jpa.repositories.DeviceRepository;
@@ -14,12 +14,12 @@ import org.springframework.stereotype.Service;
 public class UnlinkToGreenhouseCommandHandler implements IUnlinkToGreenhouseCommandHandler {
 
     private final DeviceRepository deviceRepository;
-    private final IRemoveMonitoringReportCacheCommandHandler removeMonitoringReportCacheCommandHandler;
+    private final IRemoveDeviceAssignmentCommandHandler removeDeviceAssignmentCommandHandler;
 
     @Autowired
-    public UnlinkToGreenhouseCommandHandler(DeviceRepository deviceRepository, IRemoveMonitoringReportCacheCommandHandler removeMonitoringReportCacheCommandHandler) {
+    public UnlinkToGreenhouseCommandHandler(DeviceRepository deviceRepository, IRemoveDeviceAssignmentCommandHandler removeDeviceAssignmentCommandHandler) {
         this.deviceRepository = deviceRepository;
-        this.removeMonitoringReportCacheCommandHandler = removeMonitoringReportCacheCommandHandler;
+        this.removeDeviceAssignmentCommandHandler = removeDeviceAssignmentCommandHandler;
     }
 
     @Override
@@ -39,8 +39,7 @@ public class UnlinkToGreenhouseCommandHandler implements IUnlinkToGreenhouseComm
         // Save the device
         deviceRepository.save(device);
 
-        // Remove the monitoring report cache for the device
-        removeMonitoringReportCacheCommandHandler.handle(new RemoveMonitoringReportCacheCommand(device.getDeviceCode()));
+        removeDeviceAssignmentCommandHandler.handle(new RemoveDeviceAssignmentCommand(device.getDeviceCode()));
 
         return "Device unlinked from greenhouse successfully: " + command.deviceCode();
     }

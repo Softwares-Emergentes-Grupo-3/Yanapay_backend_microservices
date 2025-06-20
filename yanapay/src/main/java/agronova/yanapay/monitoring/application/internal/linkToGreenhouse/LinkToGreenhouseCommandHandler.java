@@ -1,8 +1,8 @@
 package agronova.yanapay.monitoring.application.internal.linkToGreenhouse;
 
 import agronova.yanapay.greenhouses.infrastructure.infrastructure.persistence.jpa.repositories.GreenhouseRepository;
-import agronova.yanapay.monitoring.domain.services.insertMonitoringReportCache.IInsertMonitoringReportCacheCommandHandler;
-import agronova.yanapay.monitoring.domain.services.insertMonitoringReportCache.InsertMonitoringReportCacheCommand;
+import agronova.yanapay.monitoring.domain.services.insertDeviceAssignment.IInsertDeviceAssignmentCommandHandler;
+import agronova.yanapay.monitoring.domain.services.insertDeviceAssignment.InsertDeviceAssignmentCommand;
 import agronova.yanapay.monitoring.domain.services.linkToGreenhouse.ILinkToGreenhouseCommandHandler;
 import agronova.yanapay.monitoring.domain.services.linkToGreenhouse.LinkToGreenhouseCommand;
 import agronova.yanapay.monitoring.infrastructure.persistence.jpa.repositories.DeviceRepository;
@@ -16,13 +16,13 @@ public class LinkToGreenhouseCommandHandler implements ILinkToGreenhouseCommandH
 
     private final DeviceRepository deviceRepository;
     private final GreenhouseRepository greenhouseRepository;
-    private final IInsertMonitoringReportCacheCommandHandler insertMonitoringReportCommandHandler;
+    private final IInsertDeviceAssignmentCommandHandler insertDeviceAssignmentCommandHandler;
 
     @Autowired
-    public LinkToGreenhouseCommandHandler(DeviceRepository deviceRepository, GreenhouseRepository greenhouseRepository, IInsertMonitoringReportCacheCommandHandler insertMonitoringReportCommandHandler) {
+    public LinkToGreenhouseCommandHandler(DeviceRepository deviceRepository, GreenhouseRepository greenhouseRepository, IInsertDeviceAssignmentCommandHandler insertDeviceAssignmentCommandHandler) {
         this.deviceRepository = deviceRepository;
         this.greenhouseRepository = greenhouseRepository;
-        this.insertMonitoringReportCommandHandler = insertMonitoringReportCommandHandler;
+        this.insertDeviceAssignmentCommandHandler = insertDeviceAssignmentCommandHandler;
     }
 
     @Override
@@ -53,12 +53,9 @@ public class LinkToGreenhouseCommandHandler implements ILinkToGreenhouseCommandH
         deviceRepository.save(device);
 
         // Insert a monitoring report to indicate the device is linked to the greenhouse
-        var reportCommand = new InsertMonitoringReportCacheCommand(
-                device.getDeviceCode(),
-                device.getGreenhouse().getId()
-        );
+        var deviceAssignmentCommand = new InsertDeviceAssignmentCommand(device.getDeviceCode(), greenhouse.getId());
 
-        insertMonitoringReportCommandHandler.handle(reportCommand);
+        insertDeviceAssignmentCommandHandler.handle(deviceAssignmentCommand);
 
         return "Device linked to greenhouse successfully: " + command.deviceCode();
     }

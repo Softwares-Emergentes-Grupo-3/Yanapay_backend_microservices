@@ -1,40 +1,14 @@
 version: '3.8'
 
 services:
-  postgres:
-    image: postgres:17.4
-    container_name: postgres_db
-    restart: always
-    environment:
-      POSTGRES_DB: yanapay_db
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-    ports:
-      - "5432:5432"
-    networks:
-      - yanapay-net
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
-  mongo:
-    image: mongo:8.0.9
-    container_name: mongo_db
-    restart: always
-    ports:
-      - "27017:27017"
-    networks:
-      - yanapay-net
-  
   monitoring_service:
     build: ./monitoring_service
     container_name: monitoring_service
     ports:
       - "8082:8082"
     environment:
-      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/yanapay_db
+      SPRING_DATA_MONGODB_URI: secret
+      SPRING_DATA_MONGODB_DATABASE: secret
       
       MONITORING_MQTT_BROKER: ssl://82d60bde50f04e3e80b0904f43cdcd44.s1.eu.hivemq.cloud:8883
       MONITORING_MQTT_USERNAME: Access_2
@@ -49,19 +23,17 @@ services:
     ports:
       - "8081:8081"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/yanapay_db
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: postgres
+      SPRING_DATASOURCE_URL: secret
+      SPRING_DATASOURCE_USERNAME: secret
+      SPRING_DATASOURCE_PASSWORD: secret
 
-      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/yanapay_db
+      SPRING_DATA_MONGODB_URI: secret
+      SPRING_DATA_MONGODB_DATABASE: secret_db
       
       YANAPAY_MQTT_BROKER: ssl://82d60bde50f04e3e80b0904f43cdcd44.s1.eu.hivemq.cloud:8883
       YANAPAY_MQTT_USERNAME: Access_1
       YANAPAY_MQTT_PASSWORD: Access_1
       YANAPAY_MQTT_CLIENT_ID: access_yanapay_service
-    depends_on:
-      postgres:
-        condition: service_healthy
     networks:
       - yanapay-net
 

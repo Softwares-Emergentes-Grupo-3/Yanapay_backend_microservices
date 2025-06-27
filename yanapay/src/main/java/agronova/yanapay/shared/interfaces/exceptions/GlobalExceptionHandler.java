@@ -1,6 +1,5 @@
 package agronova.yanapay.shared.interfaces.exceptions;
 
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -43,6 +42,17 @@ public class GlobalExceptionHandler {
     public ErrorMessage conflictException(ConflictException ex, WebRequest request){
         return new ErrorMessage(
                 HttpStatus.CONFLICT.value(),
+                ex.getMessage(),
+                request.getDescription(false),
+                LocalDateTime.now()
+        );
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
+    public ErrorMessage unauthorizedException(UnauthorizedException ex, WebRequest request){
+        return new ErrorMessage(
+                HttpStatus.UNAUTHORIZED.value(),
                 ex.getMessage(),
                 request.getDescription(false),
                 LocalDateTime.now()

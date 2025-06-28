@@ -1,10 +1,13 @@
 package agronova.yanapay.iam.domain.models.aggregates;
 
+import agronova.yanapay.greenhouses.domain.model.aggregates.Greenhouse;
 import agronova.yanapay.iam.domain.models.entities.Profile;
 import agronova.yanapay.shared.domain.model.aggregates.BaseDomainModel;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Getter
 @Setter
@@ -20,6 +23,9 @@ public class User extends BaseDomainModel {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "profile_id", referencedColumnName = "id")
     private Profile profile;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST, orphanRemoval = false)
+    private Set<Greenhouse> greenhouses;
 
     public User() {
         super();

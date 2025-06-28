@@ -1,4 +1,6 @@
 package agronova.yanapay.greenhouses.domain.services.createGreenhouse;
 
-public record CreateGreenhouseCommand(String name) {
+import java.time.LocalDate;
+
+public record CreateGreenhouseCommand(Long userId, String name, LocalDate plantingDate) {
 }

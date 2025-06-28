@@ -21,20 +21,12 @@ public class GetAllDevicesController extends DeviceController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<GetAllDevicesResponse>> getAllDevices() {
+    public ResponseEntity<GetAllDevicesResponse> getAllDevices() {
         var getAllDevicesQuery = new GetAllDevicesQuery();
 
         var result = getAllDevicesQueryHandler.handle(getAllDevicesQuery);
 
-        var response = result.stream()
-                .map(x ->
-                        new GetAllDevicesResponse(
-                                x.getId(),
-                                x.getDeviceCode(),
-                                x.isOnline()
-                        )
-                )
-                .toList();
+        var response = new GetAllDevicesResponse(result);
 
         return ResponseEntity.ok(response);
     }

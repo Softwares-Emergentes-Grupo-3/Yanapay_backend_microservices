@@ -20,7 +20,7 @@ public class UpdateGreenhouseController extends GreenhouseController {
         this.updateGreenhouseCommandHandler = updateGreenhouseCommandHandler;
     }
 
-    @PutMapping("/update")
+    @PutMapping()
     public ResponseEntity<UpdateGreenhouseResponse> updateGreenhouse(@Valid @RequestBody UpdateGreenhouseRequest request) {
         var updateGreenhouseCommand = new UpdateGreenhouseCommand(request.id() ,request.name());
 

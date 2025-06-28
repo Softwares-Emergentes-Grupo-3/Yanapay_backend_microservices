@@ -17,7 +17,7 @@ public class DeleteGreenhouseController extends GreenhouseController {
         this.commandHandler = commandHandler;
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<DeleteGreenhouseResponse> deleteGreenhouse(@PathVariable Long id) {
         var command = new DeleteGreenhouseCommand(id);
         String responseMessage = commandHandler.handle(command);

@@ -23,19 +23,12 @@ public class GetAllGreenhouseController extends GreenhouseController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<GetAllGreenhouseResponse>> getAllGreenhouse() {
+    public ResponseEntity<GetAllGreenhouseResponse> getAllGreenhouse() {
         var getAllGreenhouseQuery = new GetAllGreenhouseQuery();
 
         var result = getAllGreenhouseQueryHandler.handle(getAllGreenhouseQuery);
 
-        var response = result.stream()
-                .map(x ->
-                        new GetAllGreenhouseResponse(
-                                x.getId(),
-                                x.getName()
-                        )
-                )
-                .toList();
+        var response = new GetAllGreenhouseResponse(result);
 
         return ResponseEntity.ok(response);
     }

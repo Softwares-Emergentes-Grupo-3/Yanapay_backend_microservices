@@ -39,7 +39,7 @@ public class GetGreenhouseByIdController extends GreenhouseController {
                 .map(DeviceDTO::fromEntity)
                 .toList();
 
-        var response = new GetGreenhouseByIdResponse(greenhouse.getId(), greenhouse.getName(),deviceDtos);
+        var response = new GetGreenhouseByIdResponse(greenhouse.getId(), greenhouse.getName(), greenhouse.getPlantingDate(),deviceDtos);
 
         return ResponseEntity.ok(response);
     }

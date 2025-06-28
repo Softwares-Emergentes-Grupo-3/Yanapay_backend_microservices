@@ -21,13 +21,13 @@ public class CreateGreenhouseController extends GreenhouseController {
         this.createGreenhouseCommandHandler = createGreenhouseCommandHandler;
     }
 
-    @PostMapping("/create-greenhouse")
+    @PostMapping()
     public ResponseEntity<CreateGreenhouseResponse> createGreenhouse(@Valid @RequestBody CreateGreenhouseRequest request) {
-        var createGreenhouseCommand = new CreateGreenhouseCommand(request.name());
+        var createGreenhouseCommand = new CreateGreenhouseCommand(request.userId(), request.name(), request.plantingDate());
 
         var result = createGreenhouseCommandHandler.handle(createGreenhouseCommand);
 
-        var response = new CreateGreenhouseResponse(result);
+        var response = new CreateGreenhouseResponse(result.getId(), result.getName(), result.getPlantingDate());
 
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }

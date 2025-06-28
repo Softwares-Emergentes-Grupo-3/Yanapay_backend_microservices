@@ -1,5 +1,7 @@
 package agronova.yanapay.greenhouses.domain.services.createGreenhouse;
 
+import agronova.yanapay.greenhouses.domain.model.aggregates.Greenhouse;
+
 public interface ICreateGreenhouseCommandHandler {
-    String handle(CreateGreenhouseCommand command);
+    Greenhouse handle(CreateGreenhouseCommand command);
 }

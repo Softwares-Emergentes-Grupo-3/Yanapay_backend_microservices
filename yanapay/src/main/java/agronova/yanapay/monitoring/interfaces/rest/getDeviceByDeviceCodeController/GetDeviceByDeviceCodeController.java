@@ -28,11 +28,7 @@ public class GetDeviceByDeviceCodeController extends DeviceController {
 
         var device = getDeviceByDeviceCodeQueryHandler.handle(query);
 
-        var response = new GetDeviceByDeviceCodeResponse(
-                device.getId(),
-                device.getDeviceCode(),
-                device.isOnline()
-        );
+        var response = new GetDeviceByDeviceCodeResponse(device);
 
         return ResponseEntity.ok(response);
     }

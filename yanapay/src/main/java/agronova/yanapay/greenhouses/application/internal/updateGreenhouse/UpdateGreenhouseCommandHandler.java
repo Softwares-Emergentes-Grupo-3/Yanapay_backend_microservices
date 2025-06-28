@@ -25,8 +25,9 @@ public class UpdateGreenhouseCommandHandler implements IUpdateGreenhouseCommandH
         var greenhouse = greenhouseRepository.findById(command.id())
                 .orElseThrow(() -> new ResourceNotFoundException("Greenhouse not found with id: " + command.id()));
 
-        if (greenhouseRepository.existsByName((command.name()))) {
-            throw new ConflictException("Name already exists");
+        if (greenhouseRepository.existsByNameAndUser_Id(command.name(), greenhouse.getUser().getId()) &&
+        !greenhouse.getName().equals(command.name())) {
+            throw new ConflictException("Greenhouse with this name already exists for this user");
         }
 
         greenhouse.updateName(command.name());
